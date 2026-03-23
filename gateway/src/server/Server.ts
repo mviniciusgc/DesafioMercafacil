@@ -7,11 +7,8 @@ async function startGateway() {
   const gateway = new ApolloGateway({
     supergraphSdl: new IntrospectAndCompose({
       subgraphs: [
-        {
-          name: "content",
-          url: "http://localhost:4001/graphql",
-        },
-        // depois vamos adicionar review-service aqui
+        { name: "content", url: "http://localhost:4001/graphql" },
+        { name: "review", url: "http://localhost:4002/graphql" },
       ],
     }),
   });
