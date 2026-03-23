@@ -1,0 +1,23 @@
+services:
+  content-service:
+    build: ./content-service
+    container_name: content-service
+    ports:
+      - "4001:4001"
+
+  review-service:
+    build: ./review-service
+    container_name: review-service
+    ports:
+      - "4002:4002"
+
+  gateway:
+    build: ./gateway
+    environment:
+      - RUNNING_IN_DOCKER=true
+    container_name: gateway
+    ports:
+      - "4000:4000"
+    depends_on:
+      - content-service
+      - review-service

@@ -4,14 +4,27 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import { IntrospectAndCompose } from "@apollo/gateway";
 
 async function startGateway() {
-  const gateway = new ApolloGateway({
-    supergraphSdl: new IntrospectAndCompose({
-      subgraphs: [
-        { name: "content", url: "http://localhost:4001/graphql" },
-        { name: "review", url: "http://localhost:4002/graphql" },
-      ],
-    }),
-  });
+  
+const isDocker = process.env.RUNNING_IN_DOCKER === "true";
+
+const gateway = new ApolloGateway({
+  supergraphSdl: new IntrospectAndCompose({
+    subgraphs: [
+      {
+        name: "content",
+        url: isDocker
+          ? "http://content-service:4001/graphql"
+          : "http://localhost:4001/graphql",
+      },
+      {
+        name: "review",
+        url: isDocker
+          ? "http://review-service:4002/graphql"
+          : "http://localhost:4002/graphql",
+      },
+    ],
+  }),
+});
 
   const server = new ApolloServer({
     gateway,

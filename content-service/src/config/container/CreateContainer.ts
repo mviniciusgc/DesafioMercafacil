@@ -1,4 +1,3 @@
-// container.ts
 import { CharacterProvider } from "../../modules/character/providers/CharacterProvider";
 import { CharacterService } from "../../modules/character/services/CharacterService";
 

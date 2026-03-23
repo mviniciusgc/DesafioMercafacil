@@ -1,4 +1,3 @@
-// character.provider.ts
 import axios from "axios";
 import { ICharacterProvider } from "../interfaces/ICharacterProvider";
 

@@ -1,4 +1,3 @@
-// character.service.ts
 import { ICharacterProvider } from "../interfaces/ICharacterProvider";
 
 export class CharacterService {
